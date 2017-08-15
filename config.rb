@@ -1,3 +1,12 @@
+require 'dotenv/load'
+require 'require_all'
+require 'active_record'
+
+load_all 'config/*.rb'
+
+require_all 'lib'
+require_all 'models'
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
