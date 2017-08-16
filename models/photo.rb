@@ -9,7 +9,7 @@ class Photo < ApplicationRecord
     new(attributes).tap do |photo|
       uploaded = photo.upload(file)
 
-      photo.save! if uploaded?
+      photo.save! if photo.uploaded?
     end
   end
 
@@ -24,7 +24,7 @@ class Photo < ApplicationRecord
   def upload(file)
     @image = Imgur.upload(file)
 
-    return unless image && image.id.present?
+    return unless @image && @image.id.present?
 
     assign_attributes(
       external_id: image.id,

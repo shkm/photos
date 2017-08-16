@@ -8,8 +8,9 @@ require 'yaml'
 
 
 namespace :albums do
-  desc "Create an album and populate it with photos."
-  task :create, [:name, :body, :photos_directory] do |_, args|
+  desc "Add photos to a new or existing album, and upload them."
+  # If files already exist in the album, skip them.
+  task :add_photos, [:name, :photos_directory] do |_, args|
     # TODO: move these requires / loads somewhere else.
     # Perhaps just load middleman first.
 
@@ -23,23 +24,24 @@ namespace :albums do
 
     require 'middleman'
 
-    album = Album.create!(
+    album = Album.find_or_create_by!(
       name: args[:name],
-      body: args[:body]
     )
 
     logger = Middleman::Logger.singleton
 
-    Dir["#{args[:photos_directory]}/*"].each do |path|
-      File.open(path, 'rb') do |file|
-        photo = Photo.create_with_upload(file, album: album)
-
-        if photo.uploaded?
-          logger.info "Uploaded #{file.path} to #{photo.link}."
-        else
-          logger.error "Failed to upload #{file.path}."
-        end
+    Dir["#{args[:photos_directory]}/*.jpg"].each do |path|
+      if album.photos.exists?(filename: File.basename(path))
+        logger.info "Skipping #{path}."
+        next
       end
+
+      photo = Photo.create_with_upload(path, album: album)
+
+      # We'll already get a log message on failure.
+      next unless photo.uploaded?
+
+      logger.info "Uploaded #{path} to #{photo.link}."
     end
   end
 end
