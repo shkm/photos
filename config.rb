@@ -7,12 +7,29 @@ load_all 'config/*.rb'
 require_all 'lib'
 require_all 'models'
 
+webpack_command = if build?
+                    'BUILD_PRODUCTION=1 ./node_modules/webpack/bin/webpack.js --bail'
+                  else
+                    'BUILD_DEVELOPMENT=1 ./node_modules/webpack/bin/webpack.js --watch -d --progress --color'
+                  end
+
+activate :external_pipeline,
+  name: :webpack,
+  command: webpack_command,
+  source: ".tmp/dist",
+  latency: 1
+
+set :css_dir, 'assets/stylesheets'
+set :js_dir, 'assets/javascript'
+set :images_dir, 'images'
+
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = "last 2 versions"
-end
+# activate :autoprefixer do |prefix|
+#   prefix.browsers = "last 2 versions"
+# end
 
 # Layouts
 # https://middlemanapp.com/basics/layouts/
