@@ -1,16 +1,5 @@
-!!! 5
-%html
-  %head
-    %meta{ charset: "utf-8" }
-    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
-    %title= current_page.data.title || "Photos"
-    = stylesheet_link_tag "main.bundle"
-    = javascript_include_tag "main.bundle"
+= wrap_layout :basic do
+  %section.section
+    .container
+      %h1.title= current_page.data.title
 
-  %body
-    %section.section
-      .container
-        %h1.title
-          Title
-        %p.subtitle
-          Subtitle

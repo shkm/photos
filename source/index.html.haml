@@ -1,0 +1,15 @@
+---
+layout: basic
+---
+%section.section
+  - Album.order(:date).each_slice(columns = 3) do |albums|
+    .columns
+      - albums.each do |album|
+        .column.is-one-third
+          %article.box
+            %p.title= album.name
+            %p.subtitle= album.human_date
+            %figure.image
+              = image_tag album.cover_photo.link
+
+
