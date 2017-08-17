@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817180247) do
+ActiveRecord::Schema.define(version: 20170817180358) do
 
   create_table "albums", force: :cascade do |t|
-    t.string "name"
-    t.date   "date"
+    t.string  "name"
+    t.date    "date"
+    t.integer "cover_photo_id"
+    t.index ["cover_photo_id"], name: "index_albums_on_cover_photo_id"
   end
 
   create_table "photos", force: :cascade do |t|

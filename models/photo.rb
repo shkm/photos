@@ -1,5 +1,6 @@
 class Photo < ApplicationRecord
   belongs_to :album
+  has_one :covered_album, class_name: 'Album', foreign_key: :cover_photo_id
 
   validates :external_id, presence: true
 
