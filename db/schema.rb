@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817180031) do
+ActiveRecord::Schema.define(version: 20170817180247) do
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
-    t.text   "body"
     t.date   "date"
   end
 
