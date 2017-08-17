@@ -1,4 +1,13 @@
 class Photo < ApplicationRecord
+  LINK_SUFFIXES = {
+    small_square: 's',
+    big_square: 'b',
+    small_thumbnail: 't',
+    medium_thumbnail: 'm',
+    large_thumbnail: 'l',
+    huge_thumbnail: 'h'
+  }.freeze
+
   belongs_to :album
   has_one :covered_album, class_name: 'Album', foreign_key: :cover_photo_id
 
@@ -14,6 +23,14 @@ class Photo < ApplicationRecord
     end
   end
 
+  def link(format = :original)
+    return super() if !format || (format == :original)
+
+    super().split('.').tap do |splitted|
+      splitted[-2] += LINK_SUFFIXES[format]
+    end.join('.')
+  end
+
   def uploaded?
     external_id.present?
   end
@@ -21,7 +38,6 @@ class Photo < ApplicationRecord
   def image
     @image ||= Imgur.image(external_id)
   end
-
   def upload(file)
     @image = Imgur.upload(file)
 

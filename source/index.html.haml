@@ -2,14 +2,11 @@
 layout: basic
 ---
 %section.section
-  - Album.order(:date).each_slice(columns = 3) do |albums|
-    .columns
-      - albums.each do |album|
-        .column.is-one-third
-          %article.box
-            %p.title= album.name
-            %p.subtitle= album.human_date
-            %figure.image
-              = image_tag album.cover_photo.link
-
-
+  .columns.is-multiline
+    - Album.find_each do |album|
+      .column.is-half-tablet.is-one-third-desktop.is-one-quarter-widescreen
+        %article.box
+          %p.title.is-4= album.name
+          %p.subtitle.is-6= album.human_date
+          %figure.image
+            = image_tag album.cover_photo.link(:large_thumbnail)
