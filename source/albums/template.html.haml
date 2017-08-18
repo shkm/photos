@@ -1,5 +1,10 @@
 .columns.is-multiline
   - album.photos.each do |photo|
     .column.is-half-tablet.is-one-third-desktop.is-one-quarter-widescreen
-      %figure.image
-        = image_tag photo.link(:large_thumbnail)
+      = link_to photo.link,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        class: 'has-image-modal',
+        data: { image: photo.link } do
+        %figure.image.is-rounded
+          = image_tag photo.link(:large_thumbnail)

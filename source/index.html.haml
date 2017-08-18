@@ -2,12 +2,13 @@
 layout: basic
 ---
 %section.section
-  .columns.is-multiline
-    - Album.find_each do |album|
-      .column.is-half-tablet.is-one-third-desktop.is-one-quarter-widescreen
-        %article.box
-          %p.title.is-4= album_link(album)
-          %p.subtitle.is-6= album.human_date
-          %figure.image
-            = album_link(album) do
-              = image_tag album.cover_photo.link(:large_thumbnail)
+  .container
+    .columns.is-multiline
+      - Album.find_each do |album|
+        .column.is-half-tablet.is-one-third-desktop.is-one-quarter-widescreen
+          %article
+            %p.title.is-4= album_link(album)
+            %p.subtitle.is-6= album.human_date
+            %figure.image.is-rounded
+              = album_link(album) do
+                = image_tag album.cover_photo.link(:large_thumbnail)
