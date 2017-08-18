@@ -1,9 +1,10 @@
 = wrap_layout :basic do
-  %section.section
-    .container
-      %h1.title= locals.fetch(:title, current_page.data.title)
-      - if (subtitle = locals.fetch(:subtitle, current_page.data.subtitle))
-        %h2.subtitle= subtitle
+  %section.hero.is-primary
+    .hero-body
+      .container
+        %h1.title= locals.fetch(:title, current_page.data.title)
+        - if (subtitle = locals.fetch(:subtitle, current_page.data.subtitle))
+          %h2.subtitle= subtitle
 
   %section.section
     .container
