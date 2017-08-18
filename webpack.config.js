@@ -11,6 +11,10 @@ const extractSass = new ExtractTextPlugin(
 )
 
 module.exports = {
+  /// https://github.com/webpack-contrib/css-loader/issues/447
+  node: {
+    fs: "empty"
+  },
   entry: [
     __dirname + "/assets/javascripts/main.js",
     __dirname + "/assets/stylesheets/main.sass"
@@ -34,6 +38,15 @@ module.exports = {
         // use style-loader in development
         fallback: "style-loader"
       })
+    }, {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: "babel-loader",
+        options: {
+          presets: ["env"]
+        }
+      }
     }]
   },
 
