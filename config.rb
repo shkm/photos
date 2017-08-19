@@ -46,6 +46,7 @@ helpers AlbumHelpers
 
 # Build
 
+set :build_dir, 'docs'
 # configure :build do
 #   activate :minify_css
 #   activate :minify_javascript
