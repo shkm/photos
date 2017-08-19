@@ -9,6 +9,6 @@ layout: basic
           %article
             %p.title.is-4= album_link(album)
             %p.subtitle.is-6= album.human_date
-            %figure.image.is-rounded
+            %figure.image
               = album_link(album) do
-                = image_tag album.cover_photo.link(:large_thumbnail)
+                = image_tag album.cover_photo.link(:large_thumbnail), class: 'is-rounded'

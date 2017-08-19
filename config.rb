@@ -43,7 +43,6 @@ end
 # Helpers
 require_all 'helpers'
 helpers AlbumHelpers
-helpers PhotoHelpers
 
 # Build
 

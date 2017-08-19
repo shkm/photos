@@ -1,6 +1,6 @@
 const webpack = require("webpack")
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
-
 const definePlugin = new webpack.DefinePlugin({
   __DEVELOPMENT__: JSON.stringify(JSON.parse(process.env.BUILD_DEVELOPMENT || false)),
   __PRODUCTION__: JSON.stringify(JSON.parse(process.env.BUILD_PRODUCTION || false))
@@ -44,14 +44,31 @@ module.exports = {
       use: {
         loader: "babel-loader",
         options: {
-          presets: ["env"]
+          "presets": [
+            ["env", {
+              "targets": {
+                "browsers": ["> 5%"]
+              }
+            }]
+          ]
         }
       }
+    }, {
+      test: /\.(png|jpg|gif|eof|woff)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {}  
+        }
+      ]
     }]
   },
 
   plugins: [
     definePlugin,
-    extractSass
+    extractSass,
+    new CopyWebpackPlugin([
+      { from: 'node_modules/lightgallery.js/dist', to: 'lightgallery' },
+    ])
   ]
 }
