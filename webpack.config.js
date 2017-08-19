@@ -47,7 +47,7 @@ module.exports = {
           "presets": [
             ["env", {
               "targets": {
-                "browsers": ["> 5%"]
+                "browsers": ["> 1%"]
               }
             }]
           ]
