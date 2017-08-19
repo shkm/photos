@@ -47,10 +47,12 @@ helpers AlbumHelpers
 # Build
 
 set :build_dir, 'docs'
+
+activate :minify_html
+activate :gzip
+
 after_build do |builder|
   File.open("#{Dir.pwd}/#{config.build_dir}/CNAME", 'w') { |f| f.write 'photos.schembri.me' }
 end
 # configure :build do
-#   activate :minify_css
-#   activate :minify_javascript
 # end
