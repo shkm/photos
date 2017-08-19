@@ -2,6 +2,10 @@
   %meta{ charset: "utf-8" }
   %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
   %title= locals[:title] || current_page.data.title || "Jamie's photos"
+  %meta{ property: 'og:title', content: locals[:title] || current_page.data.title || "Jamie's photos" }
+  %meta{ property: 'og:image', content: locals[:image] || current_page.data.image || 'http://photos.schembri.me/images/jamie.jpg' }
+  %meta{ property: 'og:url', content: config.site_url + current_page.url }
+  %meta{ property: 'og:type', content: 'website' }
   = stylesheet_link_tag "main.bundle"
   = javascript_include_tag "main.bundle"
   = stylesheet_link_tag "lightgallery/css/lightgallery.css"

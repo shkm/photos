@@ -20,6 +20,7 @@ activate :external_pipeline,
   source: ".tmp/dist",
   latency: 1
 
+set :site_url, 'http://photos.schembri.me'
 set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'images'
