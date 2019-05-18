@@ -6,11 +6,10 @@ require 'active_record'
 require 'require_all'
 require 'yaml'
 
-
 namespace :albums do
   desc "Add photos to a new or existing album, and upload them."
   # If files already exist in the album, skip them.
-  task :add_photos, [:name, :photos_directory] do |_, args|
+  task :add_photos, [:name, :date, :photos_directory] do |_, args|
     # TODO: move these requires / loads somewhere else.
     # Perhaps just load middleman first.
 
@@ -26,6 +25,7 @@ namespace :albums do
 
     album = Album.find_or_create_by!(
       name: args[:name],
+      date: args[:date]
     )
 
     logger = Middleman::Logger.singleton
@@ -49,7 +49,6 @@ end
 namespace :db do
   db_config       = YAML::load(File.open('config/database.yml'))
   db_config_admin = db_config
-
 
   desc "Create the database"
   task :create do

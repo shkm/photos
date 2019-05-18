@@ -37,6 +37,11 @@ IMGUR_REFRESH_TOKEN=
 
 This task may need to be run a few times before all photos complete upload.  Imgur's rate limits don't seem to be quite that set in stone.
 ```sh
-rake albums:add_photos['album name','folder_path']
+rake "albums:add_photos[album name, date, folder_path]"
 ```
 
+e.g.
+
+```sh
+rake "albums:add-photos[My awesome photos, 2019-05-18, some_dir]"
+```
