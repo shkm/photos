@@ -14,8 +14,8 @@ module Imgur
   
   def self.upload(file)
     session.image.image_upload(file)
-  rescue
-    Middleman::Logger.singleton.error("Failed to upload #{file}")
+  rescue StandardError => e
+    Middleman::Logger.singleton.error("Failed to upload #{file}. error=#{e.message}")
 
     return
   end
